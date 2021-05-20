@@ -20,19 +20,20 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              new Text("Let's Cook", 
+              style: TextStyle(
+                fontFamily: 'RalewayLight',
+                fontSize: 50.0, 
+                fontWeight: FontWeight.bold, 
+                color: Colors.green,
+              ),
+            ),
               Container(
               child: Image(
                 image: AssetImage("image/logo.png"),
                 fit: BoxFit.contain,
-                height: 320,
-                width: 250,
-              ),
-            ),
-            new Text("Let's Cook", 
-              style: TextStyle(
-                fontSize: 25.0, 
-                fontWeight: FontWeight.bold, 
-                color: Colors.green,
+                height: 250,
+                width: 200,
               ),
             ),
             SizedBox(height: 20,),
@@ -46,7 +47,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInButton() {
     return RaisedButton(
-      splashColor: Colors.white,
+      splashColor: Colors.grey,
+      color: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
@@ -68,7 +70,6 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Image(image: AssetImage("image/search.png"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
