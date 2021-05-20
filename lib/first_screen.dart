@@ -1,4 +1,3 @@
-// Copyright (c) 2019 Souvik Biswas
 import 'package:flutter/material.dart';
 import 'package:lets_cook/login_page.dart';
 import 'package:lets_cook/sign_in.dart';

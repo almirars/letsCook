@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lets_cook/kategori.dart';
 import 'package:lets_cook/sign_in.dart';
 import 'package:lets_cook/first_screen.dart';
+import 'package:sign_button/constants.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,8 +20,22 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
-              SizedBox(height: 50),
+              Container(
+              child: Image(
+                image: AssetImage("image/logo.png"),
+                fit: BoxFit.contain,
+                height: 320,
+                width: 250,
+              ),
+            ),
+            new Text("Let's Cook", 
+              style: TextStyle(
+                fontSize: 25.0, 
+                fontWeight: FontWeight.bold, 
+                color: Colors.green,
+              ),
+            ),
+            SizedBox(height: 20,),
               _signInButton(),
             ],
           ),
@@ -29,15 +45,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _signInButton() {
-    return OutlineButton(
-      splashColor: Colors.grey,
+    return RaisedButton(
+      splashColor: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return KategoriScreen();
                 },
               ),
             );
@@ -46,21 +62,20 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+            // Image(image: AssetImage("image/search.png"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
             )
