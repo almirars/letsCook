@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lets_cook/kategori.dart';
 import 'package:lets_cook/sign_in.dart';
 import 'package:lets_cook/first_screen.dart';
-import 'package:sign_button/constants.dart';
+// import 'package:sign_button/constants.dart';
 
 class LoginPage extends StatefulWidget {
   @override
