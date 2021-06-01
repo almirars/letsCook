@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lets_cook/kategori.dart';
 import 'package:lets_cook/sign_in.dart';
-import 'package:lets_cook/first_screen.dart';
+import 'package:lets_cook/screen/home.dart';
+import '../menu.dart';
 // import 'package:sign_button/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return KategoriScreen();
+                  return HomeScreen();
                 },
               ),
             );

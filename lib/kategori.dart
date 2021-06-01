@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lets_cook/login_page.dart';
+import 'package:lets_cook/screen/login_page.dart';
 import 'package:lets_cook/sign_in.dart';
 import 'package:lets_cook/menu.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+//import 'package:carousel_slider/carousel_slider.dart';
+import 'pilihan/itemWestern.dart';
+import 'pilihan/item.dart';
+import 'pilihan/itemChi.dart';
 
 class KategoriScreen extends StatelessWidget {
    @override
@@ -32,7 +35,7 @@ body: Center(
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MenuScreen(),
+                  builder: (context) => IndonesiaScreen(),
                 ));
           },
         ),
@@ -55,7 +58,7 @@ body: Center(
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MenuScreen(),
+                  builder: (context) => WesternScreen(),
                 ));
           },
         ),
@@ -69,7 +72,7 @@ body: Center(
         child: RaisedButton(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(70)),
           color: Colors.green[200],
-          child: Text('Chinesse', 
+          child: Text('Chinese', 
           style: TextStyle(
             fontSize: 40,
             fontFamily: "RalewayLight",
@@ -78,7 +81,7 @@ body: Center(
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MenuScreen(),
+                  builder: (context) => ChineseScreen(),
                 ));
           },
         ),
