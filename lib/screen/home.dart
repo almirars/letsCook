@@ -1,14 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:lets_cook/indo/indo_page.dart';
+import 'package:lets_cook/west/west_page.dart';
+import 'package:lets_cook/model/item.dart';
+import 'package:lets_cook/screen/entryForm.dart';
 import '../model/carousel_model.dart';
 import '../color.dart';
 import '../widget/bottomNavigation.dart';
 import '../pilihan/item.dart';
 import '../pilihan/itemChi.dart';
 import '../pilihan/itemWestern.dart';
+import 'package:lets_cook/database/Database.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
+  static String tag = 'home-page';
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -25,12 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String a;
+    final User userArgs = ModalRoute.of(context).settings.arguments;
+    if (userArgs != null) {
+      a = userArgs.uid;
+    }
     return Scaffold(
-       appBar: AppBar(
-         title: Text("Let's Cook"),
-       ),
+      appBar: AppBar(
+        title: Text("Let's Cook"),
+      ),
 
       bottomNavigationBar: BottomNavigationLetsCook(),
+
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
       //     Navigator.of(context).push(
@@ -103,93 +116,117 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            // indonesia
             Container(
               padding: EdgeInsets.all(10.0),
             ),
-            SizedBox(
-              width: 130.0,
-              height: 70.0,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: Colors.green[200],
-                child: Text(
-                  'Indonesia',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "RalewayLight",
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // indonesia
+                  Container(
+                    padding: EdgeInsets.all(10.0),
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => IndonesiaScreen(),
-                      ));
-                },
-              ),
-            ),
-            // western
-            Container(
-              padding: EdgeInsets.all(10.0),
-            ),
-            SizedBox(
-              width: 130.0,
-              height: 70.0,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: Colors.green[200],
-                child: Text(
-                  'Western',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "RalewayLight",
+                  SizedBox(
+                    width: 70.0,
+                    height: 70.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: Colors.green[200],
+                      child: Text(
+                        'I',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "RalewayLight",
+                        ),
+                      ),
+                      // onPressed: () async {
+                      //   await navigateToEntryForm(
+                      //       context, null, null, null, null, a);
+                      // },
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => IndoPage(),
+                            ));
+                      },
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WesternScreen(),
-                      ));
-                },
-              ),
-            ),
+                  // western
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  SizedBox(
+                    width: 70.0,
+                    height: 70.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: Colors.green[200],
+                      child: Text(
+                        'W',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "RalewayLight",
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WestPage(),
+                            ));
+                      },
+                    ),
+                  ),
 
-            //chinese
-            Container(
-              padding: EdgeInsets.all(10.0),
-            ),
-            SizedBox(
-              width: 130.0,
-              height: 70.0,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: Colors.green[200],
-                child: Text(
-                  'Chinese',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "RalewayLight",
+                  //chinese
+                  Container(
+                    padding: EdgeInsets.all(10.0),
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChineseScreen(),
-                      ));
-                },
+                  SizedBox(
+                    width: 70.0,
+                    height: 70.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: Colors.green[200],
+                      child: Text(
+                        'C',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "RalewayLight",
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChineseScreen(),
+                            ));
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            
+            //     Container(
+            //   margin: EdgeInsets.only(bottom: 10),
+            //   child: FloatingActionButton(
+            //     child: Icon(Icons.add),
+            //     onPressed: () async {
+            //       var item =
+            //           await navigateToEntryForm(context, null, null, null, i, null);
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),
     );
+    
   }
 }

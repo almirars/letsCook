@@ -6,6 +6,7 @@ import 'package:lets_cook/screen/login_page.dart';
 
 class BottomNavigationLetsCook extends StatefulWidget {
   @override
+  // static String tag = 'bot-page';
   _BottomNavigationLetsCookState createState() =>
       _BottomNavigationLetsCookState();
 }
