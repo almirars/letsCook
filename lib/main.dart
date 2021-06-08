@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_cook/sign_in.dart';
 import 'screen/login_page.dart';
 import 'screen/home.dart';
 
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
-    HomeScreen.tag: (context) => HomeScreen(),
+    HomeScreen.tag: (context) => HomeScreen(id),
   };
 
   Widget build(BuildContext context) {

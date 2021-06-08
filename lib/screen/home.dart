@@ -2,20 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:lets_cook/indo/indo_page.dart';
+import 'package:lets_cook/sign_in.dart';
 import 'package:lets_cook/west/west_page.dart';
-import 'package:lets_cook/model/item.dart';
-import 'package:lets_cook/screen/entryForm.dart';
 import '../model/carousel_model.dart';
 import '../color.dart';
 import '../widget/bottomNavigation.dart';
-import '../pilihan/item.dart';
-import '../pilihan/itemChi.dart';
-import '../pilihan/itemWestern.dart';
-import 'package:lets_cook/database/Database.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   static String tag = 'home-page';
+  final id;
+  HomeScreen(this.id);
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -129,28 +126,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.all(10.0),
                   ),
                   SizedBox(
-                    width: 70.0,
-                    height: 70.0,
+                    width: 130.0,
+                    height: 90.0,
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       color: Colors.green[200],
                       child: Text(
-                        'I',
+                        'Indonesia',
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: "RalewayLight",
                         ),
                       ),
-                      // onPressed: () async {
-                      //   await navigateToEntryForm(
-                      //       context, null, null, null, null, a);
-                      // },
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => IndoPage(),
+                              builder: (context) => IndoPage(id),
                             ));
                       },
                     ),
@@ -160,14 +153,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.all(10.0),
                   ),
                   SizedBox(
-                    width: 70.0,
-                    height: 70.0,
+                    width: 130.0,
+                    height: 90.0,
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       color: Colors.green[200],
                       child: Text(
-                        'W',
+                        'Western',
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: "RalewayLight",
@@ -177,35 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => WestPage(),
-                            ));
-                      },
-                    ),
-                  ),
-
-                  //chinese
-                  Container(
-                    padding: EdgeInsets.all(10.0),
-                  ),
-                  SizedBox(
-                    width: 70.0,
-                    height: 70.0,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      color: Colors.green[200],
-                      child: Text(
-                        'C',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "RalewayLight",
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChineseScreen(),
+                              builder: (context) => WestPage(id),
                             ));
                       },
                     ),
@@ -213,16 +178,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            //     Container(
-            //   margin: EdgeInsets.only(bottom: 10),
-            //   child: FloatingActionButton(
-            //     child: Icon(Icons.add),
-            //     onPressed: () async {
-            //       var item =
-            //           await navigateToEntryForm(context, null, null, null, i, null);
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),

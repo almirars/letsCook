@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:lets_cook/indo/indo.dart';
+import 'package:lets_cook/database/Database.dart';
 
 class EntryForm extends StatefulWidget {
-  final ItemIndo item;
-  EntryForm(this.item);
+  final String menu;
+  final String bahan;
+  final String caraBuat;
+  final String id;
+  final String docId;
+  EntryForm(this.menu, this.bahan, this.caraBuat, this.id, this.docId);
   @override
-  EntryFormState createState() => EntryFormState(this.item);
+  EntryFormState createState() => EntryFormState(this.menu, this.bahan, this.caraBuat, id, docId);
 }
 
-//class controller
 class EntryFormState extends State<EntryForm> {
-  ItemIndo item;
-  EntryFormState(this.item);
+  String menu;
+  String bahan;
+  String caraBuat;
+  String id;
+  String docId;
+  EntryFormState(this.menu, this.bahan, this.caraBuat, this.id,this.docId);
   TextEditingController menuController = TextEditingController();
   TextEditingController bahanController = TextEditingController();
   TextEditingController caraBuatController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
 //kondisi
-    if (item != null) {
-      menuController.text = item.menu;
-      bahanController.text = item.bahan;
-      caraBuatController.text = item.caraBuat;
+    if (menu != null) {
+      menuController.text = menu;
+      bahanController.text = bahan;
+      caraBuatController.text = caraBuat;
     }
 //rubah
     return Scaffold(
         appBar: AppBar(
-          title: item == null ? Text('Tambah') : Text('Ubah'),
+          title: Text('Menu') ,
+          // Text('Tambah') : Text('Ubah'),
           leading: Icon(Icons.keyboard_arrow_left),
         ),
         body: Padding(
@@ -101,20 +111,22 @@ class EntryFormState extends State<EntryForm> {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          if (item == null) {
-// tambah data
-                            item = ItemIndo(
-                                menuController.text,
-                                bahanController.text,
-                                caraBuatController.text,);
+                          if (menu == null) {
+                            Database.addItem(
+                                id: id.toString(),
+                                menu: menuController.text,
+                                bahan: bahanController.text,
+                                caraBuat: caraBuatController.text);
                           } else {
-// ubah data
-                            item.menu = menuController.text;
-                            item.bahan = bahanController.text;
-                            item.caraBuat = bahanController.text;
+                            Database.updateItem(
+                            uid: id.toString(),
+                            menu: menuController.text,
+                            bahan: bahanController.text,
+                            caraBuat: bahanController.text,
+                            docId: docId);
                           }
 // kembali ke layar sebelumnya dengan membawa objek item
-                          Navigator.pop(context, item);
+                          Navigator.pop(context);
                         },
                       ),
                     ),

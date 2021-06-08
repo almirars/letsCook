@@ -27,15 +27,37 @@ class Database {
         .catchError((e) => print(e));
   }
 
-   static Future<void> updateItem({
+  static Future<void> addItemW({
+    String id,
+    String menu,
+    String bahan,
+    String caraBuat,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(id).collection('western').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "menu": menu,
+      "bahan": bahan,
+      "caraBuat": caraBuat,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Note item added to the database"))
+        .catchError((e) => print(e));
+  }
+
+   static Future<void> updateItem(
+     {
     String uid,
     String menu,
-    int bahan,
-    int caraBuat,
+    String bahan,
+    String caraBuat,
     String docId,
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(uid).collection('items').doc(docId);
+        _mainCollection.doc(uid).collection('item').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
       "menu": menu,
@@ -49,11 +71,43 @@ class Database {
         .catchError((e) => print(e));
   }
 
-  Stream<QuerySnapshot> readItems(
+  static Future<void> updateItemW(
+     {
+    String uid,
+    String menu,
+    String bahan,
+    String caraBuat,
+    String docId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(uid).collection('western').doc(docId);
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "menu": menu,
+      "bahan": bahan,
+      "caraBuat": caraBuat,
+    };
+
+    await documentReferencer
+        .update(data)
+        .whenComplete(() => print("Note item updated in the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot> readItems(
     String uid
   ) {
     CollectionReference notesItemCollection =
-        _mainCollection.doc(uid).collection('items');
+        _mainCollection.doc(uid).collection('item');
+
+    return notesItemCollection.snapshots();
+  }
+
+static Stream<QuerySnapshot> readItemsW(
+    String uid
+  ) {
+    CollectionReference notesItemCollection =
+        _mainCollection.doc(uid).collection('western');
 
     return notesItemCollection.snapshots();
   }
@@ -63,7 +117,20 @@ class Database {
     String docId,
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(uid).collection('items').doc(docId);
+        _mainCollection.doc(uid).collection('item').doc(docId);
+
+    await documentReferencer
+        .delete()
+        .whenComplete(() => print('Note item deleted from the database'))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> deleteItemW({
+    String uid,
+    String docId,
+  }) async {
+    DocumentReference documentReferencer =
+        _mainCollection.doc(uid).collection('western').doc(docId);
 
     await documentReferencer
         .delete()

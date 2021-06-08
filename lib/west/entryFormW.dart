@@ -1,33 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:lets_cook/west/west.dart';
+import 'package:lets_cook/database/Database.dart';
 
-class EntryForm extends StatefulWidget {
-  final ItemWest item;
-  EntryForm(this.item);
+class EntryFormW extends StatefulWidget {
+  final String menu;
+  final String bahan;
+  final String caraBuat;
+  final String id;
+  final String docId;
+  EntryFormW(this.menu, this.bahan, this.caraBuat, this.id, this.docId);
   @override
-  EntryFormState createState() => EntryFormState(this.item);
+  EntryFormWState createState() => EntryFormWState(this.menu, this.bahan, this.caraBuat, id, docId);
 }
 
-//class controller
-class EntryFormState extends State<EntryForm> {
-  ItemWest item;
-  EntryFormState(this.item);
-  TextEditingController menuWController = TextEditingController();
-  TextEditingController bahanWController = TextEditingController();
-  TextEditingController caraBuatWController = TextEditingController();
+class EntryFormWState extends State<EntryFormW> {
+  String menu;
+  String bahan;
+  String caraBuat;
+  String id;
+  String docId;
+  EntryFormWState(this.menu, this.bahan, this.caraBuat, this.id,this.docId);
+  TextEditingController menuController = TextEditingController();
+  TextEditingController bahanController = TextEditingController();
+  TextEditingController caraBuatController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
 //kondisi
-    if (item != null) {
-      menuWController.text = item.menuW;
-      bahanWController.text = item.bahanW;
-      caraBuatWController.text = item.caraBuatW;
+    if (menu != null) {
+      menuController.text = menu;
+      bahanController.text = bahan;
+      caraBuatController.text = caraBuat;
     }
 //rubah
     return Scaffold(
         appBar: AppBar(
-          title: item == null ? Text('Tambah') : Text('Ubah'),
+          title: Text('Menu') ,
           leading: Icon(Icons.keyboard_arrow_left),
         ),
         body: Padding(
@@ -38,7 +46,7 @@ class EntryFormState extends State<EntryForm> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: menuWController,
+                  controller: menuController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Nama Masakan',
@@ -55,7 +63,7 @@ class EntryFormState extends State<EntryForm> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: bahanWController,
+                  controller: bahanController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Bahan Masakan',
@@ -73,7 +81,7 @@ class EntryFormState extends State<EntryForm> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: caraBuatWController,
+                  controller: caraBuatController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Cara Membuat',
@@ -102,20 +110,22 @@ class EntryFormState extends State<EntryForm> {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          if (item == null) {
-// tambah data
-                            item = ItemWest(
-                                menuWController.text,
-                                bahanWController.text,
-                                caraBuatWController.text,);
+                          if (menu == null) {
+                            Database.addItemW(
+                                id: id.toString(),
+                                menu: menuController.text,
+                                bahan: bahanController.text,
+                                caraBuat: caraBuatController.text);
                           } else {
-// ubah data
-                            item.menuW = menuWController.text;
-                            item.bahanW = bahanWController.text;
-                            item.caraBuatW = caraBuatWController.text;
+                            Database.updateItemW(
+                            uid: id.toString(),
+                            menu: menuController.text,
+                            bahan: bahanController.text,
+                            caraBuat: bahanController.text,
+                            docId: docId);
                           }
 // kembali ke layar sebelumnya dengan membawa objek item
-                          Navigator.pop(context, item);
+                          Navigator.pop(context);
                         },
                       ),
                     ),

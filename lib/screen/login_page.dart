@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
             loginButton,
             Container(
               alignment: Alignment.center,
-              child: Text("- OR -"),
+              child: Text("atau"),
             ),
             SizedBox(
               height: 20,
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return HomeScreen();
+                  return HomeScreen(id);
                 },
               ),
             );
