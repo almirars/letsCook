@@ -9,7 +9,8 @@ class EntryForm extends StatefulWidget {
   final String docId;
   EntryForm(this.menu, this.bahan, this.caraBuat, this.id, this.docId);
   @override
-  EntryFormState createState() => EntryFormState(this.menu, this.bahan, this.caraBuat, id, docId);
+  EntryFormState createState() =>
+      EntryFormState(this.menu, this.bahan, this.caraBuat, id, docId);
 }
 
 class EntryFormState extends State<EntryForm> {
@@ -18,11 +19,10 @@ class EntryFormState extends State<EntryForm> {
   String caraBuat;
   String id;
   String docId;
-  EntryFormState(this.menu, this.bahan, this.caraBuat, this.id,this.docId);
+  EntryFormState(this.menu, this.bahan, this.caraBuat, this.id, this.docId);
   TextEditingController menuController = TextEditingController();
   TextEditingController bahanController = TextEditingController();
   TextEditingController caraBuatController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class EntryFormState extends State<EntryForm> {
 //rubah
     return Scaffold(
         appBar: AppBar(
-          title: Text('Menu') ,
+          title: Text('Menu'),
           // Text('Tambah') : Text('Ubah'),
           leading: Icon(Icons.keyboard_arrow_left),
         ),
@@ -110,6 +110,9 @@ class EntryFormState extends State<EntryForm> {
                           'Save',
                           textScaleFactor: 1.5,
                         ),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
                         onPressed: () {
                           if (menu == null) {
                             Database.addItem(
@@ -119,11 +122,11 @@ class EntryFormState extends State<EntryForm> {
                                 caraBuat: caraBuatController.text);
                           } else {
                             Database.updateItem(
-                            uid: id.toString(),
-                            menu: menuController.text,
-                            bahan: bahanController.text,
-                            caraBuat: bahanController.text,
-                            docId: docId);
+                                uid: id.toString(),
+                                menu: menuController.text,
+                                bahan: bahanController.text,
+                                caraBuat: bahanController.text,
+                                docId: docId);
                           }
 // kembali ke layar sebelumnya dengan membawa objek item
                           Navigator.pop(context);
@@ -145,6 +148,9 @@ class EntryFormState extends State<EntryForm> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
                       ),
                     ),
                   ],

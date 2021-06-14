@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:lets_cook/model/item.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('notes');
@@ -102,6 +101,7 @@ class Database {
 
     return notesItemCollection.snapshots();
   }
+
 
 static Stream<QuerySnapshot> readItemsW(
     String uid

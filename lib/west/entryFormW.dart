@@ -109,6 +109,9 @@ class EntryFormWState extends State<EntryFormW> {
                           'Save',
                           textScaleFactor: 1.5,
                         ),
+                         shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
                         onPressed: () {
                           if (menu == null) {
                             Database.addItemW(
@@ -144,6 +147,9 @@ class EntryFormWState extends State<EntryFormW> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                         shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
                       ),
                     ),
                   ],

@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 190,
+              height: 250,
               child: Swiper(
                 onIndexChanged: (index) {
                   setState(() {
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 12,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -112,6 +112,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
                 ),
               ],
+            ),
+            Container(
+              padding: EdgeInsets.all(10.0),
+            ),
+            new Text(
+              'Mau masak apa hari ini?',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "RalewayLight",
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green),
             ),
             Container(
               padding: EdgeInsets.all(10.0),
@@ -182,6 +193,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-    
   }
 }

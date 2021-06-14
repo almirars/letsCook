@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_cook/sign_in.dart';
 import 'dart:async';
 import 'package:lets_cook/database/dbHelper.dart';
-import 'package:lets_cook/indo/entryForm.dart';
-import 'package:lets_cook/indo/indo.dart';
 import 'package:lets_cook/database/Database.dart';
-import 'package:lets_cook/screen/home.dart';
 import 'package:lets_cook/west/entryFormW.dart';
 import 'package:lets_cook/west/west.dart';
 
@@ -35,15 +31,17 @@ class WestPageState extends State<WestPage> {
           child: fireList(c),
         ),
         Container(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.bottomRight,
+          margin : EdgeInsets.all(20.0),
           child: SizedBox(
-            width: double.infinity,
-            child: RaisedButton(
-              child: Text("Tambah Menu"),
+             child: FloatingActionButton.extended(
               onPressed: () async {
                 var item = await navigateToEntryFormW(
                     context, null, null, null, c, null);
               },
+              label: const Text('Tambah'),
+              icon: const Icon(Icons.add),
+              backgroundColor: Colors.green,
             ),
           ),
         ),

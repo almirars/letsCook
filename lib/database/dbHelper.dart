@@ -4,7 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:lets_cook/model/item.dart';
 import 'package:lets_cook/model/userSql.dart';
 
 class DbHelper {

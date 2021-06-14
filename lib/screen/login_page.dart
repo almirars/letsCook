@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
         key: formKey,
         child: ListView(
           shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0, top: 150),
+          padding: EdgeInsets.only(left: 24.0, right: 24.0, top: 50),
           children: <Widget>[
             Center(
               child: Column(

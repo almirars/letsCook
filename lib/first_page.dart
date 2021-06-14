@@ -1,72 +1,69 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:lets_cook/database/dbHelper.dart';
-import 'package:lets_cook/indo/entryForm.dart';
-import 'package:lets_cook/indo/indo.dart';
+import 'package:lets_cook/screen/login_page.dart';
 import 'package:lets_cook/database/Database.dart';
+import 'package:lets_cook/database/dbHelper.dart';
+import 'package:lets_cook/indo/indo.dart';
+import 'package:lets_cook/indo/entryForm.dart';
 
-//pendukung program asinkron
-class IndoPage extends StatefulWidget {
-  // router untuk memanggil halaman ItemPage pada main
-  static const IndoP = '/indoPage';
-  final id;
-  IndoPage(this.id);
+
+class FirstPage extends StatefulWidget {
   @override
-  IndoPageState createState() => IndoPageState();
+  static String tag = 'first-page';
+  final id;
+  FirstPage(this.id);
+  @override
+  _FirstPageState createState() => _FirstPageState();
 }
 
-class IndoPageState extends State<IndoPage> {
+class _FirstPageState extends State<FirstPage> {
   DbHelper dbHelper = DbHelper();
   int count = 0;
   List<ItemIndo> itemList;
   @override
   Widget build(BuildContext context) {
-    String c = widget.id;
+  String c = widget.id;
     if (itemList == null) {
       itemList = List<ItemIndo>();
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Daftar Item'),
-      ),
-      body: Column(children: [
-        Expanded(
-          child: fireList(c),
-        ),
-        Container(
-          alignment: Alignment.bottomRight,
-          margin : EdgeInsets.all(20.0),
-          child: SizedBox(
-            child: FloatingActionButton.extended(
-              onPressed: () async {
-                var item = await navigateToEntryForm(
-                    context, null, null, null, c, null);
-                // var item = await navigateToEntryForm(
-                //       //       context, null, null, null, null, a);
-                if (item != null) {
-//TODO 2 Panggil Fungsi untuk Insert ke DB
-                  int result = await dbHelper.insert(item);
-                  if (result > 0) {}
-                }
-              },
-              label: const Text('Tambah'),
-              icon: const Icon(Icons.add),
-              backgroundColor: Colors.green,
+      // appBar: AppBar(
+      //   title: const Text('Floating Action Button'),
+      // ),
+      // body: const Center(child: Text('Press the button below!')),
+
+      body: Column(
+         children: [
+        //    Expanded(
+        //   child: fireList(c),
+        // ),
+          Container(
+          margin : EdgeInsets.fromLTRB(16, 30, 16, 8),
+          width: 600,
+          child: Text(
+            'Mau makan apa hari ini?',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontFamily: 'RalewayLight',
+              fontSize: 50.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
             ),
           ),
-        ),
-      ]),
+        ),]
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
+        },
+        child: const Icon(Icons.meeting_room),
+        backgroundColor: Colors.green,
+      ),
     );
-  }
-
-  Future<ItemIndo> navigateToEntryForm(BuildContext context, String menu,
-      String bahan, String caraBuat, String id, String docId) async {
-    var result = await Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) {
-      return EntryForm(menu, bahan, caraBuat, id, docId);
-    }));
-    return result;
   }
 
   StreamBuilder fireList(String a) {
@@ -105,14 +102,14 @@ class IndoPageState extends State<IndoPage> {
                   trailing: GestureDetector(
                     child: Icon(Icons.delete),
                     onTap: () async {
-                      await Database.deleteItem(uid: a, docId: docID);
+                          await Database.deleteItem(uid: a, docId: docID);
                     },
                   ),
                   onTap: () async {
-                    var item = await navigateToEntryForm(
-                        context, menu, bahan, caraBuat, a, docID);
+                    var item = await navigateToEntryForm(context, menu, bahan, caraBuat, a, docID);
                     int result = await dbHelper.update(item);
-                    if (result > 0) {}
+                    if (result > 0) {
+                    }
                   },
                 ),
               );
@@ -121,5 +118,13 @@ class IndoPageState extends State<IndoPage> {
         }
       },
     );
+  }
+  Future<ItemIndo> navigateToEntryForm(BuildContext context, String menu,
+      String bahan, String caraBuat, String id, String docId) async {
+    var result = await Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) {
+      return EntryForm(menu, bahan, caraBuat, id, docId);
+    }));
+    return result;
   }
 }

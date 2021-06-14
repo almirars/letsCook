@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lets_cook/color.dart';
-import 'package:lets_cook/kategori.dart';
 import 'package:lets_cook/sign_in.dart';
 import 'package:lets_cook/screen/login_page.dart';
 

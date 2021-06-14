@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lets_cook/sign_in.dart';
 import 'screen/login_page.dart';
 import 'screen/home.dart';
+import 'package:lets_cook/splashScreen.dart';
 
 void main() => runApp(MyApp());   
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: LoginPage(),
+      home: SplashScreenPage(),
       routes: routes,
     );
   }
